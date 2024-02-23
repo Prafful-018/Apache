@@ -1,0 +1,90 @@
+login as: prafful
+prafful@192.168.29.238's password:
+Activate the web console with: systemctl enable --now cockpit.socket
+
+Last login: Fri Feb 23 19:45:51 2024 from 192.168.29.87
+[prafful@MyLinuxVM ~]$ su -
+Password:
+[root@MyLinuxVM ~]# rpm -qa | grep httpd
+httpd-2.4.37-62.module_el8+657+88b2113f.x86_64
+httpd-filesystem-2.4.37-62.module_el8+657+88b2113f.noarch
+httpd-tools-2.4.37-62.module_el8+657+88b2113f.x86_64
+centos-logos-httpd-85.8-2.el8.noarch
+[root@MyLinuxVM ~]# cd /var/www/html/
+[root@MyLinuxVM html]# ls -ltr
+total 4
+-rw-r--r--. 1 root root 51 Feb 12 14:25 index.html
+[root@MyLinuxVM html]# vi index.html
+[root@MyLinuxVM html]# cat index.html
+<!DOCTYPE html>
+<html>
+<body style="background-color: lightgrey:">
+<br>
+<h1 style="text-align:centre;">Welcome to My First Page</h1>
+<h4 style="text-align:centre;">My name is Prafful Mishra</h4>
+<br>
+<br>
+<br>
+</body>
+</html>
+[root@MyLinuxVM html]# systemctl restart httpd.service
+[root@MyLinuxVM html]# systemctl enable httpd.service
+[root@MyLinuxVM html]# systemctl stop firewalld
+[root@MyLinuxVM html]# systemctl disable firewalld
+Removed /etc/systemd/system/multi-user.target.wants/firewalld.service.
+Removed /etc/systemd/system/dbus-org.fedoraproject.FirewallD1.service.
+[root@MyLinuxVM html]#
+[root@MyLinuxVM html]# ifconfig | more
+cni-podman0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 10.88.0.1  netmask 255.255.0.0  broadcast 10.88.255.255
+        inet6 fe80::9019:a7ff:fe1f:ded3  prefixlen 64  scopeid 0x20<link>
+        ether 92:19:a7:1f:de:d3  txqueuelen 1000  (Ethernet)
+        RX packets 100  bytes 9102 (8.8 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 95  bytes 11038 (10.7 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+enp0s3: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet 192.168.29.238  netmask 255.255.255.0  broadcast 192.168.29.255
+        inet6 fe80::a00:27ff:fe70:13ab  prefixlen 64  scopeid 0x20<link>
+        inet6 2405:201:5c0b:3115:a00:27ff:fe70:13ab  prefixlen 64  scopeid 0x0<global>
+        ether 08:00:27:70:13:ab  txqueuelen 1000  (Ethernet)
+        RX packets 648331  bytes 838230948 (799.3 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 280273  bytes 29749970 (28.3 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 57  bytes 3224 (3.1 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 57  bytes 3224 (3.1 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+veth0bd6a48f: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::2097:bff:fe9d:e4bd  prefixlen 64  scopeid 0x20<link>
+        ether 22:97:0b:9d:e4:bd  txqueuelen 0  (Ethernet)
+        RX packets 27  bytes 3373 (3.2 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 99  bytes 9636 (9.4 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+veth7c1ba69a: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet6 fe80::e42d:a3ff:fedd:a23b  prefixlen 64  scopeid 0x20<link>
+        ether e6:2d:a3:dd:a2:3b  txqueuelen 0  (Ethernet)
+        RX packets 18  bytes 1312 (1.2 KiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 95  bytes 8880 (8.6 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+virbr0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
+        inet 192.168.122.1  netmask 255.255.255.0  broadcast 192.168.122.255
+        ether 52:54:00:6b:81:64  txqueuelen 1000  (Ethernet)
+        RX packets 0  bytes 0 (0.0 B)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 0  bytes 0 (0.0 B)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+[root@MyLinuxVM html]#

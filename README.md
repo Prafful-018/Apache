@@ -7,8 +7,8 @@ Configuration files = /etc/http/conf/httpd.conf
 
                     = /var/www/html/index.html
 
-Service: systemctl restart httpd
+Service = systemctl restart httpd
 
-         systemctl enable httpd
+        = systemctl enable httpd
 
 Log Files: /var/log/httpd
